@@ -8,7 +8,7 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract
+class User extends \Eloquent implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable, CanResetPassword;
 
@@ -32,4 +32,26 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    /**
+     * Get the list of groups that are managed by this user.
+     *
+     * @return array
+     */
+    public function getManagedUsers() {
+
+    }
+
+    /**
+     * Checks if the user passed in is managed by this user.
+     *
+     * @param object $user
+     *   The user passed in.
+     *
+     * @return bool
+     *   If managed.
+     */
+    public function ifManages($user) {
+
+    }
 }

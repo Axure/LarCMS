@@ -14,3 +14,15 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/articcles', function() {
+    return 'fucked';
+});
+
+Route::get('/articles', 'ArticleController@index');
+Route::get('/articles/{id}', ['uses' => 'ArticleController@show']);
+Route::delete('/articles/{id}', ['uses' => 'ArticleController@destroy']);
+
+Route::get('/dashboard', function() {
+    return view('dashboard');
+});
