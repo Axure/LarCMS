@@ -20,30 +20,43 @@ class Article extends \Eloquent
     /**
      * The attributes that are mass assignable.
      *
+     * Contents are html codes.
+     *
      * @var array
      */
     protected $fillable = ['title', 'content', 'author'];
 
     /**
-     *
-     * @return array
-     *   The Group objects that this user belongs to.
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function getGroup() {
-
+    public function comments()
+    {
+        return $this->hasMany('Comment');
     }
+
+    public function author()
+    {
+        return $this->belongsTo('User');
+    }
+
 
     /**
-     * Check if the user can edit the article.
      *
-     * @param object $user
-     *   The user to be checked.
+     * @return array
      *
-     * @return bool
-     *   The result.
      */
-    public function ifEditable($user) {
 
-    }
+//    /**
+//     * Check if the user can edit the article.
+//     *
+//     * @param object $user
+//     *   The user to be checked.
+//     *
+//     * @return bool
+//     *   The result.
+//     */
+//    public function ifEditable($user) {
+//
+//    }
 
 }

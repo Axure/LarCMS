@@ -49,6 +49,26 @@ class ArticleTableSeeder extends Seeder
         }
 
         /**
+         * Checks if the `users` table exists.
+         * If it exists, delete it.
+         */
+        if (Schema::hasTable('users'))
+        {
+            $this->command->info('Old table detected!');
+//            DB::table('articles')->delete();
+            Schema::drop('users');
+            $this->command->info('Old table deleted!');
+
+            /**
+             * If after deletion the table still exists, then I'm fucked.
+             */
+            if (Schema::hasTable('users'))
+            {
+                $this->command->info('Im fucked');
+            }
+        }
+
+        /**
          * Recreate the articles table
          */
         Schema::create('articles', function($table)
@@ -59,7 +79,22 @@ class ArticleTableSeeder extends Seeder
             $table->string('author');
             $table->timestamps();
         });
-        $this->command->info('Recreation succeeded!');
+        $this->command->info('Recreation of articles succeeded!');
+
+        /**
+         * Recreate the articles table
+         */
+        Schema::create('users', function($table)
+        {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('email');
+            $table->string('password');
+            $table->string('remember_token');
+            $table->timestamps();
+        });
+        $this->command->info('Recreation of users succeeded!');
+
         /**
          * Insert columns into the table.
          */

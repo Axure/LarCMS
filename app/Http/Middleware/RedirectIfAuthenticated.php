@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Controllers\Auth;
+
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 
@@ -35,7 +37,8 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next)
     {
         if ($this->auth->check()) {
-            return redirect('/home');
+            return redirect('/dashboard');
+//            return \Redirect::to('/dashboard')->with('user', \Auth::user());
         }
 
         return $next($request);

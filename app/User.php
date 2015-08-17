@@ -34,24 +34,61 @@ class User extends \Eloquent implements AuthenticatableContract, CanResetPasswor
     protected $hidden = ['password', 'remember_token'];
 
     /**
+     *
+     * @return array
+     *   The Group objects that this user belongs to.
+     */
+    public function getGroup() {
+        return Article::belongsTo('Group');
+    }
+
+    /**
      * Get the list of groups that are managed by this user.
      *
      * @return array
      */
-    public function getManagedUsers() {
+//    public function managedUsers() {
+////        return $this->hasMany('User', '');
+////        return $this->hasManyThrough('User', 'Group', 'admin_id', 'user_id');
+//        return $this->managedGroup()->users();
+//    }
 
+    public function joinedGroup() {
+//        return $this->belongsToMany('Group', 'member_relation', 'user_id', 'member_id');
+        return $this->belongsTo('Group');
     }
 
-    /**
-     * Checks if the user passed in is managed by this user.
-     *
-     * @param object $user
-     *   The user passed in.
-     *
-     * @return bool
-     *   If managed.
-     */
-    public function ifManages($user) {
+//    public function managedGroup() {
+//        return $this->belongsToMany('Group', 'manager_relation', 'user_id', 'admin_id');
+//    }
 
+//    /**
+//     * Get the list of articles that are managed by this user.
+//     *
+//     * @return array
+//     */
+//    public function managedArticles() {
+//        return $this->hasMany('Article', 'User');
+//    }
+
+    public function publishedArticles()
+    {
+        return $this->hasMany('Article');
     }
+
+    public function publishedComments()
+    {
+        return $this->hasMany('Comment');
+    }
+
+    public function managedComments()
+    {
+        return $this->hasManyThrough('Comment', 'Article');
+    }
+
+//    public function managedComments()
+//    {
+//        return $this->hasManyThrough('Comment', 'User'); // Too young, too simple.
+//    }
+
 }

@@ -6,7 +6,7 @@ A simple CMS based on Laravel.
 
 Like any Laravel application:
 
-```
+```bash
 git clone https://github.com/Axure/LarCMS.git
 cd LarCMS
 npm install
@@ -15,7 +15,7 @@ composer install
 
 Then (a quick start):
 
-```
+```bash
 php artisan serve
 ```
 
