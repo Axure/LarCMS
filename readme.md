@@ -10,6 +10,7 @@ Like any Laravel application:
 git clone https://github.com/Axure/LarCMS.git
 cd LarCMS
 npm install
+gulp
 composer install
 ```
 
