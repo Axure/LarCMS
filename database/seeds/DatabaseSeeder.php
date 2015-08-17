@@ -71,22 +71,10 @@ class ArticleTableSeeder extends Seeder
         /**
          * Recreate the articles table
          */
-        Schema::create('articles', function($table)
-        {
-            $table->increments('id');
-            $table->string('title');
-            $table->string('content');
-            $table->string('author');
-            $table->timestamps();
-        });
-        $this->command->info('Recreation of articles succeeded!');
-
-        /**
-         * Recreate the articles table
-         */
         Schema::create('users', function($table)
         {
             $table->increments('id');
+//            $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
             $table->string('name');
             $table->string('email');
             $table->string('password');
@@ -96,6 +84,21 @@ class ArticleTableSeeder extends Seeder
         $this->command->info('Recreation of users succeeded!');
 
         /**
+         * Recreate the articles table
+         */
+        Schema::create('articles', function($table)
+        {
+            $table->increments('id');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('title');
+            $table->string('content');
+            $table->string('author');
+            $table->timestamps();
+        });
+        $this->command->info('Recreation of articles succeeded!');
+
+        /**
          * Insert columns into the table.
          */
 //        Schema::table('articles', function($table)
@@ -103,7 +106,7 @@ class ArticleTableSeeder extends Seeder
 //
 //        });
 
-//        User::create(['email' => 'foo@bar.com']);
-        Article::create(['title' => 'Hi!']);
+        User::create(['email' => 'foo@bar.com']);
+        Article::create(['title' => 'Hi!', 'user_id' => 1]);
     }
 }

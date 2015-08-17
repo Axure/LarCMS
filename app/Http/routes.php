@@ -43,6 +43,12 @@ Route::get('/testdashboard', [
     'user' => \Auth::user()
 ]);
 
+/**
+ * The route to the dashboard.
+ *
+ * Use the auth middleware to authenticate.
+ * Pass the current user to the view.
+ */
 Route::get('/dashboard', ['middleware' => 'auth', function() {
     return view('dashboard', [
         'user' => \Auth::user(),

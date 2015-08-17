@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Article;
+
 class DashboardController extends Controller
 {
     /**
@@ -15,8 +17,22 @@ class DashboardController extends Controller
      * @return Response
      */
     public function index()
-    {
-        return view('dashboard')->with('user', \Auth::user());
+    {   $user = \Auth::user();
+        $articles = $user->publishedArticles;
+
+        $newArticle = new \App\Article([
+            'title' => 'This is added manually?',
+            'author' => 'Your daddy',
+            'content' => 'I don\'t know',
+        ]);
+
+        $user->publishedArticles()->save($newArticle);
+
+        return view('dashboard', [
+            'user' => $user,
+            'articles' => $articles,
+            'message' => 'Who\'s your daddy?'
+        ]);
     }
 
     /**

@@ -73,17 +73,17 @@ class User extends \Eloquent implements AuthenticatableContract, CanResetPasswor
 
     public function publishedArticles()
     {
-        return $this->hasMany('Article');
+        return $this->hasMany('App\Article');
     }
 
     public function publishedComments()
     {
-        return $this->hasMany('Comment');
+        return $this->hasMany('App\Comment');
     }
 
     public function managedComments()
     {
-        return $this->hasManyThrough('Comment', 'Article');
+        return $this->hasManyThrough('App\Comment', 'App\Article');
     }
 
 //    public function managedComments()
