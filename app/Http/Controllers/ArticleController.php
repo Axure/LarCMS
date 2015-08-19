@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use Illuminate\Http\Request;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -55,13 +56,19 @@ class ArticleController extends Controller
     public function show($id)
     {
 
+
+
         try {
             $article = Article::findOrFail($id);
-            return $article->title;
+            $comments = $article->comments;
+
+            return view('article', [
+                'article' => $article,
+                'comments' => $comments,
+            ]);
         }
         catch (ModelNotFoundException $e) {
-            $error_message = "The requested article not found.";
-            return $error_message;
+            return view('errors/404');
         }
     }
 

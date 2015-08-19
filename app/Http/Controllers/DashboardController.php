@@ -20,9 +20,15 @@ class DashboardController extends Controller
     {   $user = \Auth::user();
         $articles = $user->publishedArticles;
 
+        $managedComments = $user->managedComments;
+        $publishedComments = $user->publishedComments;
+
+        /**
+         * The new article (which is redundant and only for test.)
+         * @var $newArticle
+         */
         $newArticle = new \App\Article([
             'title' => 'This is added manually?',
-            'author' => 'Your daddy',
             'content' => 'I don\'t know',
         ]);
 
@@ -31,7 +37,9 @@ class DashboardController extends Controller
         return view('dashboard', [
             'user' => $user,
             'articles' => $articles,
-            'message' => 'Who\'s your daddy?'
+            'message' => 'Who\'s your daddy?',
+            'managedComments' => $managedComments,
+            'publishedComments' => $publishedComments,
         ]);
     }
 

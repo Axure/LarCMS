@@ -50,11 +50,12 @@ Route::get('/testdashboard', [
  * Pass the current user to the view.
  */
 Route::get('/dashboard', ['middleware' => 'auth', function() {
-    return view('dashboard', [
-        'user' => \Auth::user(),
-    ]);
+//    return view('dashboard', [
+//        'user' => \Auth::user(),
+//        'message' => 'From the route.',
+//    ]);
 //    return redirect()->action('DashboardController@index');
 //    return redirect()->action('DashboardController@index');
-//    return Redirect::action('DashboardController@index', array('user' => \Auth::user()));
+    return Redirect::action('DashboardController@index');
     // TODO: why are the above both not applicable?
 }]);

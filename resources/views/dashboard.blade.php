@@ -6,14 +6,16 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Who's your daddy?</div>
+                    <div class="panel-heading">Your published articles</div>
                     <div class="panel-body">
-                        {{ $message  }}
                         @foreach ($articles as $article)
-                            This is an article titled
-                            <h3>
-                                {{ $article->title }}
-                            </h3>
+                            <div class="panel panel-default">
+
+                                <div class="panel-heading">This is an article titled</div>
+                                <div class="panel-body">
+                                    {{ $article->content }}
+                                </div>
+                            </div>
                         @endforeach
 
                         <h3>{{ $user->title  }}</h3>

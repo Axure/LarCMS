@@ -31,7 +31,7 @@ class Article extends \Eloquent
      */
     public function comments()
     {
-        return $this->hasMany('Comment');
+        return $this->hasMany('App\Comment');
     }
 
     public function author()
